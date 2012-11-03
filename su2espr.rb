@@ -21,6 +21,8 @@
 
 require 'sketchup.rb'
 
+# Sketchup.send_action "showRubyPanel:"
+
 UI.menu("Plugins").add_item("ESP-R"){
 	resultado=sku2espr
 	UI.messagebox(resultado)
@@ -88,7 +90,7 @@ def sku2espr
 		
 			pnt_id=1
 			sfc_id=1
-			
+
 			zone=Zone.new()
 			zone.name=group.name
 			points=[]
@@ -122,14 +124,28 @@ def sku2espr
 						exists=0
 						point=i.position
 
+						# Transformation to global coordinates
+						x_loc=point.x
+						y_loc=point.y
+						z_loc=point.z
+
+						xaxe=group.transformation.xaxis
+						yaxe=group.transformation.yaxis
+						zaxe=group.transformation.zaxis
+
+						point.x=group.transformation.origin.x+x_loc*xaxe.x+y_loc*yaxe.x+z_loc*zaxe.x
+						point.y=group.transformation.origin.y+x_loc*xaxe.y+y_loc*yaxe.y+z_loc*zaxe.y
+						point.z=group.transformation.origin.z+x_loc*xaxe.z+y_loc*yaxe.z+z_loc*zaxe.z
+						#
+
 						for j in 0...zone.pntlist.length
-							if point.x==zone.pntlist[j][1] and point.y==zone.pntlist[j][2] and point.z==zone.pntlist[j][3] then
+							if point.x==zone.pntlist[j][1] and point.y==zone.pntlist[j][2] and point.z==zone.pntlist[j][3]
 								exists=1
 								id2=zone.pntlist[j][0]
 							end
 						end
 
-						if exists==0 then
+						if exists==0
 							zone.pntlist.push([pnt_id,point.x,point.y,point.z])
 							id2=pnt_id
 							pnt_id=pnt_id+1
@@ -193,6 +209,7 @@ def write_vertex(outfile,pnts)
 	outfile.puts('# tag, X co-ord, Y co-ord, Z co-ord')
 	for i in pnts
 		outfile.printf("*vertex,%.5f,%.5f,%.5f #  %1d\n",i[1].to_m,i[2].to_m,i[3].to_m,i[0])
+#		outfile.printf("*vertex,%.5f,%.5f,%.5f #  %1d\n",i[1],i[2],i[3],i[0])
 	end
 	outfile.puts('#')
 end
