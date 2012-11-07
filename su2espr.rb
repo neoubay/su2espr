@@ -299,7 +299,7 @@ def check_parent(i,faces)
 				end
 			end
 			
-			if count<faces[j].points.length and count>0
+			if count<faces[j].points.length and count>=faces[i].points.length
 				faces[i].parent=faces[j].name
 			end
 			
