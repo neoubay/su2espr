@@ -1,0 +1,65 @@
+su2espr
+
+1. INTRODUCTION
+su2espr is a Sketchup plug-in whose aim is to export geometries
+representing zones, created within Sketchup, to the geometry description
+file used in ESP-r.
+
+su2espr has been developed by Nestor Perez. Issues with su2espr can be
+reported at the project's Google Code site, found at
+http://code.google.com/p/su2espr. Questions and suggestions can be
+directed to nestor.perezrguez [at] google.com
+
+2. LICENSE
+su2espr is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+3. PREVIOUS REQUIREMENTS
+su2espr has been tested solely under Sketchup version 8. Previous
+versions should work as well, although some issues might arise.
+
+4. INSTALLATION
+In order to install su2espr, a copy of the file 'su2espr.rb' must be
+placed in the Sketchup's plug-in folder which should be located within
+Sketchup's installation directory.
+
+5. BASIC USAGE
+1) Create a new file within Sketchup and save it in a folder of your
+convenience. Note that exported files will be placed in the same folder.
+
+2) Define the geometry of each zone following the same rules required by
+ESP-r. (face's normals pointing outwards, etc.)
+
+3) Each surface must be assigned a Sketchup material other than the
+default material. Windows or any fenestration containing glazing can be
+assigned a translucent material.
+
+4) Once a zone has been defined, select every surface that comprises the
+zone and create a GROUP. It is essential that each zone is contained in
+a group.
+
+5) Name each zone/group. This will be the exported file name corresponding
+to the zone of the same name. A group can be copied to define new zones,
+but remember to change the name of the new copy.
+
+6) Place every zone in its specific relative position within the building
+to be simulated.
+
+7) Once finished click on the menu entry Plugins->ESP-R.
+
+8) If everything went right you should have as many .geo files as zones
+you defined.
+
+Alongside this file there is a folder named 'Example' where a Sketchup
+file and the corresponding geometry files, exported taking the former as
+a basis, can be found.
